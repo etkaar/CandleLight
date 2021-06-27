@@ -1,6 +1,6 @@
 
 # CandleLight.ino
-Simulates a candlelight while brightness is smoothly raised and smoothly *or* rapidly reduced. Thus, even if the sketch is still simple, it is a little bit more complex than the very easy candlelight sketches.
+Simulates a candlelight/flame effect while brightness is smoothly raised and smoothly *or* rapidly reduced. Thus, even if the sketch is still simple, it is a little bit more complex than the very easy candlelight sketches.
 
 https://github.com/etkaar/CandleLight/blob/main/CandleLight.ino
 
