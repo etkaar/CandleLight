@@ -6,7 +6,7 @@ https://github.com/etkaar/CandleLight/blob/main/CandleLight.ino
 
 #### Requirements
 
-- ATtiny85 microcontroller (or similar).
+- ATtiny85 microcontroller (or similar); see [comparison chart](https://en.wikipedia.org/wiki/ATtiny_microcontroller_comparison_chart).
 - Arduino IDE with [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) by Spence Conde.
   - You can add it by setting "http://drazzy.com/package_drazzy.com_index.json" in File > Preferences > Additional Board Manager URLs, and then Tools > Board > Boards Manager > ATTinyCore > Install.
 - A programmer for the microcontroller. You can use an Arduino Uno, ELEGOO UNO (or similar).
