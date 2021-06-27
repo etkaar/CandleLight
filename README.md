@@ -9,7 +9,7 @@ https://github.com/etkaar/CandleLight/blob/main/CandleLight.ino
 - ATtiny85 microcontroller (or similar).
 - Arduino IDE with [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) by Spence Conde.
   - You can add it by setting "http://drazzy.com/package_drazzy.com_index.json" in File > Preferences > Additional Board Manager URLs, and then Tools > Board > Boards Manager > ATTinyCore > Install.
-- A programmer for the micro controller. You can use an Arduino Uno, ELEGOO UNO (or similar).
+- A programmer for the microcontroller. You can use an Arduino Uno, ELEGOO UNO (or similar).
 
 #### Settings
 - Set your ATtiny on 1 MHz (burn bootloader before uploading the sketch).
