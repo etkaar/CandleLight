@@ -12,3 +12,8 @@ Simulates a candlelight while brightness is smoothly raised and smoothly *or* ra
 - Set your ATtiny on 1 MHz (burn bootloader before uploading the sketch).
 
 #### Real Life Example
+
+See: https://www.youtube.com/watch?v=i-p4kunlImk
+
+[![LED Candlelight Effect Example using ATtiny85](https://img.youtube.com/vi/i-p4kunlImk/maxresdefault.jpg)](https://www.youtube.com/watch?v=i-p4kunlImk)
+
