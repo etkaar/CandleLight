@@ -23,10 +23,10 @@
 /**
 *	Settings
 */
-const byte MIN_BRIGHTNESS = 190;
+const byte MIN_BRIGHTNESS = 110;
 const byte MAX_BRIGHTNESS = (255 - 1);
 
-const byte FLICKER_INTERVALL = 20;
+const byte FLICKER_INTERVALL = 100;
 
 /**
 *	Various
@@ -58,7 +58,7 @@ void loop() {
 		current_brightness = min(current_brightness + 1, MAX_BRIGHTNESS);
 		analogWrite(ARDUINOS_LED_PIN_NUMBER, current_brightness);
 		
-		requested_delay = random(1, 10);
+		requested_delay = random(1, 30);
 		
 	/**
 	*	Target brightness reached
@@ -82,25 +82,29 @@ void loop() {
 		/**
 		*	Increase delay
 		*/
-		requested_delay = random(30, 150);
+		requested_delay = random(150, 250);
 		
 	/**
 	*	Reduce brightness; make sure limits are not deceeded
 	*/
 	} else if (brightness_target < current_brightness) {
+		current_brightness = max(current_brightness - 1, MIN_BRIGHTNESS);
+		analogWrite(ARDUINOS_LED_PIN_NUMBER, current_brightness);
+		
+		requested_delay = random(1, 10);
+		
 		/**
 		*	Normally the brightness is reduced smoothly, but sometimes
 		*	we simply want a rapid flickering looking drop.
 		*/
 		if (random(0, FLICKER_INTERVALL) == 0) {
-			current_brightness = MIN_BRIGHTNESS;
-		} else {
-			current_brightness = max(current_brightness - 1, MIN_BRIGHTNESS);
+			for (byte i = 0; i < random(0, 12); i++) {
+				analogWrite(ARDUINOS_LED_PIN_NUMBER, max(current_brightness - 20, MIN_BRIGHTNESS));
+				delay(random(100, 150));
+				analogWrite(ARDUINOS_LED_PIN_NUMBER, current_brightness);
+				delay(random(100, 150));
+			}
 		}
-		
-		analogWrite(ARDUINOS_LED_PIN_NUMBER, current_brightness);
-		
-		requested_delay = random(1, 10);
 	}
 	
 	delay(requested_delay);
