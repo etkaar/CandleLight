@@ -21,15 +21,15 @@
 **/
 
 /**
-*	Settings
+*	CONSTANTS
 */
-const byte MIN_BRIGHTNESS = 110;
-const byte MAX_BRIGHTNESS = (255 - 1);
+const byte BREATHING_RANGE_START = 150;
+const byte BREATHING_RANGE_END = (255 - 1);
 
-const byte FLICKER_INTERVALL = 100;
+const byte FLICKERING_INTERVALL = 20;
 
 /**
-*	Various
+*	ATtiny85 : IC-PIN 3 (PB4)
 */
 const byte ARDUINOS_LED_PIN_NUMBER = 4;
 
@@ -39,26 +39,44 @@ void setup() {
 	/**
 	*	Initialize with minimum brightness
 	*/
-	analogWrite(ARDUINOS_LED_PIN_NUMBER, MIN_BRIGHTNESS);
+	analogWrite(ARDUINOS_LED_PIN_NUMBER, BREATHING_RANGE_START);
 }
 
 /**
-*	To be altered during runtime
+*	VARIABLES: Global
 */
-byte brightness_target = MIN_BRIGHTNESS;
-byte current_brightness = MIN_BRIGHTNESS;
+byte brightness_target = BREATHING_RANGE_START;
+byte current_brightness = BREATHING_RANGE_START;
 
 void loop() {
-	byte requested_delay = 0;
+	do_one_breathe();
+	delay(random(1, 30));
 	
+	/**
+	*	Sometimes: Abrupt continual flickering
+	*/
+	if (random(0, FLICKERING_INTERVALL) == 0) {
+		for (byte i = 0; i < random(0, 12); i++) {
+			induce_flickering((current_brightness - random(40, 70)), current_brightness);
+		}
+	/**
+	*	All the time: Some shy flickering
+	*/
+	} else {
+		induce_flickering((current_brightness - 15), current_brightness);
+	}
+}
+
+/**
+*	Brightness is smoothly raised and reduced, the flame 'breathes'
+*/
+void do_one_breathe() {
 	/**
 	*	Raise brightness; make sure limits are not exceeded
 	*/
 	if (brightness_target > current_brightness) {
-		current_brightness = min(current_brightness + 1, MAX_BRIGHTNESS);
+		current_brightness = min(current_brightness + 1, BREATHING_RANGE_END);
 		analogWrite(ARDUINOS_LED_PIN_NUMBER, current_brightness);
-		
-		requested_delay = random(1, 30);
 		
 	/**
 	*	Target brightness reached
@@ -69,43 +87,32 @@ void loop() {
 		*	Brightness was reduced before to the minimum value;
 		*	thus we now need to increase it to a random value.
 		*/
-		if (brightness_target == MIN_BRIGHTNESS) {
-			brightness_target = random((MIN_BRIGHTNESS + 1), MAX_BRIGHTNESS);	
+		if (brightness_target == BREATHING_RANGE_START) {
+			brightness_target = random((BREATHING_RANGE_START + 1), BREATHING_RANGE_END);	
 		/**
 		*	Brightness was raised before; thus we reduce it
 		*	to the minimum value now.
 		*/
 		} else {
-			brightness_target = MIN_BRIGHTNESS;
+			brightness_target = BREATHING_RANGE_START;
 		}
-		
-		/**
-		*	Increase delay
-		*/
-		requested_delay = random(150, 250);
 		
 	/**
 	*	Reduce brightness; make sure limits are not deceeded
 	*/
 	} else if (brightness_target < current_brightness) {
-		current_brightness = max(current_brightness - 1, MIN_BRIGHTNESS);
+		current_brightness = max(current_brightness - 1, BREATHING_RANGE_START);
 		analogWrite(ARDUINOS_LED_PIN_NUMBER, current_brightness);
-		
-		requested_delay = random(1, 10);
-		
-		/**
-		*	Normally the brightness is reduced smoothly, but sometimes
-		*	we simply want a rapid flickering looking drop.
-		*/
-		if (random(0, FLICKER_INTERVALL) == 0) {
-			for (byte i = 0; i < random(0, 12); i++) {
-				analogWrite(ARDUINOS_LED_PIN_NUMBER, max(current_brightness - 20, MIN_BRIGHTNESS));
-				delay(random(100, 150));
-				analogWrite(ARDUINOS_LED_PIN_NUMBER, current_brightness);
-				delay(random(100, 150));
-			}
-		}
 	}
+}
+
+/**
+*	Creates a flickering effect
+*/
+void induce_flickering(byte min, byte max) {
+	analogWrite(ARDUINOS_LED_PIN_NUMBER, min);
+	delay(random(100, 150));
 	
-	delay(requested_delay);
+	analogWrite(ARDUINOS_LED_PIN_NUMBER, max);
+	delay(random(100, 150));
 }
