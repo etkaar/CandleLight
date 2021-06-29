@@ -18,5 +18,5 @@ https://github.com/etkaar/CandleLight/blob/main/CandleLight.ino
 
 See: https://www.youtube.com/watch?v=i-p4kunlImk
 
-[![LED Candlelight Effect Example using ATtiny85](https://img.youtube.com/vi/NNBb8YCEBaA/sddefault.jpg)](https://www.youtube.com/watch?v=NNBb8YCEBaA)
+[![LED Candlelight Effect Example using ATtiny85](https://img.youtube.com/vi/i-p4kunlImk/maxresdefault.jpg)](https://www.youtube.com/watch?v=NNBb8YCEBaA)
 
