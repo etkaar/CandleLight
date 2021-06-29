@@ -16,7 +16,7 @@ https://github.com/etkaar/CandleLight/blob/main/CandleLight.ino
 
 #### Real Life Example
 
-See: https://www.youtube.com/watch?v=i-p4kunlImk
+See: https://www.youtube.com/watch?v=NNBb8YCEBaA
 
 [![LED Candlelight Effect Example using ATtiny85](https://img.youtube.com/vi/i-p4kunlImk/maxresdefault.jpg)](https://www.youtube.com/watch?v=NNBb8YCEBaA)
 
