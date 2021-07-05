@@ -49,7 +49,7 @@ byte brightness_target = BREATHING_RANGE_START;
 byte current_brightness = BREATHING_RANGE_START;
 
 void loop() {
-	do_one_breathe();
+	breathing();
 	delay(random(1, 30));
 	
 	/**
@@ -70,7 +70,7 @@ void loop() {
 /**
 *	Brightness is smoothly raised and reduced, the flame 'breathes'
 */
-void do_one_breathe() {
+void breathing() {
 	/**
 	*	Raise brightness; make sure limits are not exceeded
 	*/
